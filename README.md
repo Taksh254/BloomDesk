@@ -2,6 +2,12 @@
 
 Simple software for play schools, preschools and daycares in India. One backend, three apps: **Owner** (web), **Teacher** and **Parent** (mobile). This repo starts with the Owner web app.
 
+## Screenshots
+
+| Today | Attendance | Phone, dark mode |
+| --- | --- | --- |
+| ![Today dashboard](docs/screenshots/today.png) | ![Attendance](docs/screenshots/attendance.png) | ![Today on a phone in dark mode](docs/screenshots/today-phone-dark.png) |
+
 ## What works today
 
 - **Set up a school**: sign up with email and password, name your school, and get Playgroup, Nursery, LKG and UKG classes added for you.
