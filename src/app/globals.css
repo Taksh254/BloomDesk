@@ -1,0 +1,32 @@
+@import "tailwindcss";
+/* Crayon Box theme, copied from the design hand-off. Edit tokens there, not here. */
+@import "../styles/tokens.css";
+@import "../styles/school-details.css";
+@import "../styles/tailwind-v4.css";
+
+/* Fonts are self-hosted by next/font (see app/layout.tsx); point the theme stacks at them. */
+:root {
+  --bd-font-display: var(--font-fredoka), var(--font-baloo), system-ui, sans-serif;
+  --bd-font-body: var(--font-nunito), var(--font-mukta), system-ui, sans-serif;
+  --bd-font-hand: var(--font-kalam), var(--font-mukta), cursive;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+}
+
+:focus-visible {
+  outline: none;
+  box-shadow: var(--bd-focus);
+}
+
+/* Tabular numbers for counts and money. */
+.tnum {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Touch target sizes from DESIGN.md: min-h-tap (44px), min-h-tap-teacher (56px). */
+@theme {
+  --spacing-tap: 44px;
+  --spacing-tap-teacher: 56px;
+}

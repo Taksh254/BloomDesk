@@ -1,0 +1,191 @@
+/* BloomDesk theme tokens · v4 "Crayon Box" (Oct 2026)
+   One theme: a child's notebook. Ruled paper, crayon colours, doodled suns and stars.
+   Dark mode follows the OS; force it with <html data-theme="dark|light">.
+   Fonts (Baloo 2 and Mukta cover Hindi/Devanagari):
+   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;500;600;700&family=Kalam:wght@400;700&family=Baloo+2:wght@500;600&family=Mukta:wght@400;500;600&display=swap" rel="stylesheet">
+   Pair with school-details.css for the header, ruled paper, doodles and gold-star stickers. */
+
+/* ---- Light ---- */
+:root {
+  --bd-success: #4A7C5C;
+  --bd-success-soft: #EAF3ED;
+  --bd-success-ink: #335942;
+  --bd-on-success: #FFFFFF;
+  --bd-warning: #8A6630;
+  --bd-warning-soft: #FAF1E2;
+  --bd-warning-ink: #6B4E22;
+  --bd-danger: #A9554B;
+  --bd-danger-soft: #F8EAE8;
+  --bd-danger-ink: #7E3A32;
+  --bd-on-danger: #FFFFFF;
+  --bd-info: #4D7099;
+  --bd-info-soft: #EAF0F7;
+  --bd-info-ink: #36557A;
+  --bd-bg: #FAFBFE;
+  --bd-surface: #FFFFFF;
+  --bd-surface-2: #EEF3FB;
+  --bd-border: #DCE5F2;
+  --bd-border-strong: #7A8BA6;
+  --bd-ink: #1F2D4A;
+  --bd-ink-2: #4A5878;
+  --bd-ink-3: #5E6B88;
+  --bd-primary: #2E5FBF;
+  --bd-primary-hover: #244E9F;
+  --bd-primary-soft: #E6EEFB;
+  --bd-on-primary: #FFFFFF;
+  --bd-accent: #FFC93C;
+  --bd-accent-soft: #FFF4D6;
+  --bd-accent-ink: #7A5300;
+  --bd-on-accent: #3A2800;
+  --bd-class-playgroup: #C8443A;
+  --bd-class-nursery: #B05A0C;
+  --bd-class-lkg: #2F8547;
+  --bd-class-ukg: #2E5FBF;
+  --bd-school-accent: #2E5FBF;
+  --bd-on-school-accent: #FFFFFF;
+  --bd-ruled: #E4ECF8;
+  --bd-margin: #F4C9C9;
+  --bd-deco-sun: #FFC93C;
+  --bd-deco-cloud: #FFFFFF;
+  --bd-deco-star: #FFE08A;
+  --bd-font-display: 'Fredoka', 'Baloo 2', system-ui, sans-serif;
+  --bd-font-body: 'Nunito', 'Mukta', system-ui, sans-serif;
+  --bd-font-hand: 'Kalam', 'Mukta', cursive;
+  --bd-radius-xs: 10px;
+  --bd-radius-sm: 14px;
+  --bd-radius-md: 16px;
+  --bd-radius-lg: 24px;
+  --bd-text-display: 600 40px/44px var(--bd-font-display);
+  --bd-text-h1: 600 30px/38px var(--bd-font-display);
+  --bd-text-h2: 600 22px/28px var(--bd-font-display);
+  --bd-text-h3: 500 18px/24px var(--bd-font-body);
+  --bd-text-body: 400 16px/26px var(--bd-font-body);
+  --bd-text-body-sm: 400 14px/22px var(--bd-font-body);
+  --bd-text-label: 500 13px/18px var(--bd-font-body);
+  --bd-text-caption: 500 12px/16px var(--bd-font-body);
+  --bd-space-0: 0;
+  --bd-space-1: 4px;
+  --bd-space-2: 8px;
+  --bd-space-3: 12px;
+  --bd-space-4: 16px;
+  --bd-space-5: 20px;
+  --bd-space-6: 24px;
+  --bd-space-8: 32px;
+  --bd-space-10: 40px;
+  --bd-space-12: 48px;
+  --bd-space-16: 64px;
+  --bd-radius-pill: 999px;
+  --bd-shadow-sm: 0 1px 2px rgba(31,45,74,.05);
+  --bd-shadow-md: 0 6px 20px rgba(31,45,74,.07);
+  --bd-shadow-lg: 0 16px 40px rgba(31,45,74,.12);
+  --bd-tap: 44px;
+  --bd-tap-teacher: 56px;
+  --bd-ease: cubic-bezier(.2,.7,.2,1);
+  --bd-dur-fast: 150ms;
+  --bd-dur: 240ms;
+  --bd-focus: 0 0 0 3px var(--bd-surface), 0 0 0 5px var(--bd-primary);
+  color-scheme: light;
+}
+
+/* ---- Dark (system setting) ---- */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bd-success: #8BC2A0;
+    --bd-success-soft: #1F3328;
+    --bd-success-ink: #A9D4B9;
+    --bd-on-success: #132A1C;
+    --bd-warning: #D9B472;
+    --bd-warning-soft: #33301F;
+    --bd-warning-ink: #E6CC98;
+    --bd-danger: #E39A90;
+    --bd-danger-soft: #3A2523;
+    --bd-danger-ink: #F0BDB6;
+    --bd-on-danger: #2C1210;
+    --bd-info: #93B4D9;
+    --bd-info-soft: #1F2C3B;
+    --bd-info-ink: #B5CDE8;
+    --bd-shadow-sm: 0 1px 2px rgba(0,0,0,.25);
+    --bd-shadow-md: 0 6px 20px rgba(0,0,0,.3);
+    --bd-shadow-lg: 0 16px 40px rgba(0,0,0,.4);
+    --bd-bg: #141A2A;
+    --bd-surface: #1B2235;
+    --bd-surface-2: #232C43;
+    --bd-border: #2E3852;
+    --bd-border-strong: #5F6D8C;
+    --bd-ink: #E3E9F5;
+    --bd-ink-2: #A8B3CB;
+    --bd-ink-3: #8D99B3;
+    --bd-primary: #8EB0F0;
+    --bd-primary-hover: #A9C3F5;
+    --bd-primary-soft: #22325A;
+    --bd-on-primary: #0F1A33;
+    --bd-accent: #F5C24A;
+    --bd-accent-soft: #3A3018;
+    --bd-accent-ink: #F7D88A;
+    --bd-on-accent: #2E2100;
+    --bd-class-playgroup: #F29A90;
+    --bd-class-nursery: #F2AE6B;
+    --bd-class-lkg: #86D09A;
+    --bd-class-ukg: #8EB0F0;
+    --bd-school-accent: #2B4C8F;
+    --bd-on-school-accent: #FFFFFF;
+    --bd-ruled: #1F2740;
+    --bd-margin: #4A2A33;
+    --bd-deco-sun: #F5C24A;
+    --bd-deco-cloud: #DCE5F5;
+    --bd-deco-star: #F7D88A;
+    color-scheme: dark;
+  }
+}
+
+/* ---- Dark (forced) ---- */
+:root[data-theme="dark"] {
+  --bd-success: #8BC2A0;
+  --bd-success-soft: #1F3328;
+  --bd-success-ink: #A9D4B9;
+  --bd-on-success: #132A1C;
+  --bd-warning: #D9B472;
+  --bd-warning-soft: #33301F;
+  --bd-warning-ink: #E6CC98;
+  --bd-danger: #E39A90;
+  --bd-danger-soft: #3A2523;
+  --bd-danger-ink: #F0BDB6;
+  --bd-on-danger: #2C1210;
+  --bd-info: #93B4D9;
+  --bd-info-soft: #1F2C3B;
+  --bd-info-ink: #B5CDE8;
+  --bd-shadow-sm: 0 1px 2px rgba(0,0,0,.25);
+  --bd-shadow-md: 0 6px 20px rgba(0,0,0,.3);
+  --bd-shadow-lg: 0 16px 40px rgba(0,0,0,.4);
+  --bd-bg: #141A2A;
+  --bd-surface: #1B2235;
+  --bd-surface-2: #232C43;
+  --bd-border: #2E3852;
+  --bd-border-strong: #5F6D8C;
+  --bd-ink: #E3E9F5;
+  --bd-ink-2: #A8B3CB;
+  --bd-ink-3: #8D99B3;
+  --bd-primary: #8EB0F0;
+  --bd-primary-hover: #A9C3F5;
+  --bd-primary-soft: #22325A;
+  --bd-on-primary: #0F1A33;
+  --bd-accent: #F5C24A;
+  --bd-accent-soft: #3A3018;
+  --bd-accent-ink: #F7D88A;
+  --bd-on-accent: #2E2100;
+  --bd-class-playgroup: #F29A90;
+  --bd-class-nursery: #F2AE6B;
+  --bd-class-lkg: #86D09A;
+  --bd-class-ukg: #8EB0F0;
+  --bd-school-accent: #2B4C8F;
+  --bd-on-school-accent: #FFFFFF;
+  --bd-ruled: #1F2740;
+  --bd-margin: #4A2A33;
+  --bd-deco-sun: #F5C24A;
+  --bd-deco-cloud: #DCE5F5;
+  --bd-deco-star: #F7D88A;
+  color-scheme: dark;
+}
+
+@media (prefers-reduced-motion: reduce) { :root { --bd-dur-fast: 0ms; --bd-dur: 0ms; } }
+body { background: var(--bd-bg); color: var(--bd-ink); font: var(--bd-text-body); }
