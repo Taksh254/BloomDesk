@@ -1,0 +1,50 @@
+/* BloomDesk school details · v4 "Crayon Box"
+   The notebook feel, as a few opt-in classes. Import after tokens.css. Every class works in light and dark.
+   Keep these to headers, hero panels and empty states. Lists, tables and forms stay plain. */
+
+/* ---------- .bd-header : top of the Parent app and Teacher class bar ---------- */
+.bd-header {
+  position: relative; overflow: hidden;
+  background: var(--bd-school-accent); color: var(--bd-on-school-accent);
+  padding: 16px 20px 28px;
+}
+.bd-header > :not(.bd-doodles) { position: relative; z-index: 1; }
+.bd-header .bd-doodles { position: absolute; right: 4px; bottom: 8px; width: 170px; height: 76px; }
+.bd-header .bd-hand { color: inherit; }
+
+/* ---------- .bd-feature : one hero panel per screen (owner greeting, empty state) ---------- */
+.bd-feature { border-radius: var(--bd-radius-md); padding: 16px 20px; background: var(--bd-accent-soft); color: var(--bd-ink); }
+
+/* ---------- .bd-title : page and screen titles, with a wavy pencil-yellow underline ---------- */
+.bd-title { text-decoration: underline wavy var(--bd-accent); text-decoration-thickness: 3px; text-underline-offset: 7px; }
+
+/* ---------- .bd-hand : a short handwritten note ("Have a lovely day at school!") ---------- */
+.bd-hand { font: 400 18px/24px var(--bd-font-hand); color: var(--bd-primary); }
+
+/* ---------- .bd-paper : notebook ruled lines, with an optional red margin ---------- */
+.bd-paper { background-color: var(--bd-bg); background-image: linear-gradient(var(--bd-ruled) 1px, transparent 1px); background-size: 100% 30px; }
+.bd-paper.bd-margin { background-image: linear-gradient(90deg, transparent 14px, var(--bd-margin) 14px, var(--bd-margin) 16px, transparent 16px), linear-gradient(var(--bd-ruled) 1px, transparent 1px); background-size: 100% 100%, 100% 30px; }
+
+/* ---------- .bd-stat : stat cards on the owner dashboard, with a crayon stripe on top ---------- */
+.bd-stat { position: relative; border-top: 6px solid var(--bd-stat-color, var(--bd-primary)); }
+/* usage: <div class="bd-stat" style="--bd-stat-color: var(--bd-class-lkg)"> */
+
+/* ---------- .bd-doodles : sun, cloud and stars (SVG markup in DESIGN.md) ---------- */
+.bd-doodles { pointer-events: none; }
+.bd-doodles .sun circle { fill: var(--bd-deco-sun); }
+.bd-doodles .sun line { stroke: var(--bd-deco-sun); stroke-width: 3; stroke-linecap: round; }
+.bd-doodles .cloud { fill: var(--bd-deco-cloud); opacity: .9; }
+.bd-doodles .star { fill: var(--bd-deco-star); }
+
+/* ---------- .bd-present : the Present button becomes a gold-star sticker when marked ---------- */
+.bd-present[aria-pressed="true"] {
+  background: var(--bd-accent); border-color: var(--bd-accent); color: var(--bd-on-accent); border-radius: 50%;
+  box-shadow: 0 0 0 3px var(--bd-surface), 0 0 0 4px var(--bd-accent);
+}
+
+/* ---------- .bd-tabbar : bottom navigation ---------- */
+.bd-tabbar { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; background: var(--bd-surface); border-top: 1px solid var(--bd-border); padding: 6px 6px calc(10px + env(safe-area-inset-bottom, 0px)); }
+.bd-tab { display: grid; justify-items: center; gap: 2px; padding: 6px 0; font: 600 11px/1.2 var(--bd-font-body); color: var(--bd-ink-3); }
+.bd-tab .bd-tab-ic { display: grid; place-items: center; width: 56px; height: 30px; border-radius: 999px; }
+.bd-tab[aria-current="page"] { color: var(--bd-primary); }
+.bd-tab[aria-current="page"] .bd-tab-ic { background: var(--bd-primary-soft); }
