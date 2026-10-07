@@ -38,6 +38,14 @@ If email confirmation is on (the Supabase default), sign-up sends a link; open i
 
 Every table carries a `school_id`. Row level security only returns rows for schools the signed-in user belongs to (`school_members`). Owners and admins manage classes and children; teachers can read them and mark attendance. New schools are created only through the `create_school()` database function, which makes the caller the owner.
 
+## Android app
+
+`android/` is a small Android app that opens the BloomDesk web app full screen. It holds no screens of its own, so every web change shows up in the app straight away.
+
+- **Get the APK**: every push that touches `android/` builds one on GitHub (Actions → Android APK → BloomDesk-debug-apk).
+- **Point it at the web app**: set the `BLOOMDESK_URL` repository variable (e.g. `https://app.bloomdesk.in`) once the app is hosted. Until then the app asks for the address on first launch, so you can use `npm run dev -- -H 0.0.0.0` and type your laptop's address, like `http://192.168.1.10:3000`. Clear the app's data to change it.
+- **Build it yourself**: open `android/` in Android Studio, or run `./gradlew assembleDebug -PbloomdeskUrl=https://…` in `android/`.
+
 ## Project layout
 
 ```
@@ -49,4 +57,5 @@ src/lib               Supabase clients, session, data access, formatting
 src/styles            Crayon Box tokens (copied from the design hand-off)
 supabase/migrations   database schema and security rules
 docs/design           design system rules (DESIGN.md) and raw tokens
+android               Android app that wraps the web app
 ```

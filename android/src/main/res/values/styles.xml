@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Crayon Box tokens bd-bg and bd-primary (src/styles/tokens.css) -->
+    <color name="bd_bg">#FAFBFE</color>
+    <color name="bd_primary">#2E5FBF</color>
+    <style name="AppTheme" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:colorPrimary">@color/bd_primary</item>
+        <item name="android:colorAccent">@color/bd_primary</item>
+        <item name="android:windowBackground">@color/bd_bg</item>
+        <item name="android:statusBarColor">@color/bd_bg</item>
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+</resources>
