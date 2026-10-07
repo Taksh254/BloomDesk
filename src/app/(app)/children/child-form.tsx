@@ -20,13 +20,13 @@ export function ChildForm({ action, classes, child, defaultClassId, today }: Pro
   const isNew = !child;
 
   const base: Record<string, string> = {
-    full_name: child?.full_name ?? "",
-    date_of_birth: child?.date_of_birth ?? "",
+    full_name: child?.fullName ?? "",
+    date_of_birth: child?.dateOfBirth ?? "",
     gender: child?.gender ?? "",
-    class_id: child?.class_id ?? defaultClassId ?? "",
-    parent_name: child?.parent_name ?? "",
-    parent_phone: child?.parent_phone ?? "",
-    joined_on: child?.joined_on ?? today,
+    class_id: child?.classId ?? defaultClassId ?? "",
+    parent_name: child?.parentName ?? "",
+    parent_phone: child?.parentPhone ?? "",
+    joined_on: child?.joinedOn ?? today,
     notes: child?.notes ?? "",
   };
   // After "Save and add another" the action returns only the class, so the form starts fresh.
@@ -65,6 +65,7 @@ export function ChildForm({ action, classes, child, defaultClassId, today }: Pro
           label="Class"
           name="class_id"
           defaultValue={v.class_id}
+          error={e.class_id}
           options={[{ value: "", label: "No class yet" }, ...classes.map((c) => ({ value: c.id, label: c.name }))]}
         />
         <Field label="Joined on" name="joined_on" type="date" max={today} defaultValue={v.joined_on} error={e.joined_on} />

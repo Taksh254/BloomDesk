@@ -41,10 +41,10 @@ export default async function AttendancePage({ searchParams }: PageProps<"/atten
   }
 
   const requested = typeof sp.class === "string" ? classes.find((c) => c.id === sp.class) : undefined;
-  const cls = requested ?? classes.find((c) => children.some((k) => k.class_id === c.id)) ?? classes[0];
-  const kids = children.filter((k) => k.class_id === cls.id);
+  const cls = requested ?? classes.find((c) => children.some((k) => k.classId === c.id)) ?? classes[0];
+  const kids = children.filter((k) => k.classId === cls.id);
   const saved: Record<string, AttendanceStatus> = {};
-  for (const a of attendance) if (kids.some((k) => k.id === a.child_id)) saved[a.child_id] = a.status;
+  for (const a of attendance) if (kids.some((k) => k.id === a.childId)) saved[a.childId] = a.status;
 
   const href = (classId: string, d: string) => `/attendance?class=${classId}${d === today ? "" : `&date=${d}`}`;
 
@@ -55,7 +55,7 @@ export default async function AttendancePage({ searchParams }: PageProps<"/atten
       <nav aria-label="Classes" className="mb-4 flex gap-2 overflow-x-auto pb-1">
         {classes.map((c) => {
           const active = c.id === cls.id;
-          const n = children.filter((k) => k.class_id === c.id).length;
+          const n = children.filter((k) => k.classId === c.id).length;
           return (
             <Link
               key={c.id}
@@ -104,7 +104,7 @@ export default async function AttendancePage({ searchParams }: PageProps<"/atten
           classId={cls.id}
           date={date}
           saved={saved}
-          kids={kids.map((k) => ({ id: k.id, name: k.full_name, caption: k.parent_name ?? "" }))}
+          kids={kids.map((k) => ({ id: k.id, name: k.fullName, caption: k.parentName ?? "" }))}
         />
       )}
     </>

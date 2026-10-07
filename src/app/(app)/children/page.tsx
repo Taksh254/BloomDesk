@@ -28,9 +28,9 @@ export default async function ChildrenPage({ searchParams }: PageProps<"/childre
   const children = needle
     ? all.filter(
         (c) =>
-          c.full_name.toLowerCase().includes(needle) ||
-          c.parent_name?.toLowerCase().includes(needle) ||
-          (digits.length >= 3 && c.parent_phone?.includes(digits)),
+          c.fullName.toLowerCase().includes(needle) ||
+          c.parentName?.toLowerCase().includes(needle) ||
+          (digits.length >= 3 && c.parentPhone?.includes(digits)),
       )
     : all;
   const classById = new Map(classes.map((c) => [c.id, c]));
@@ -111,18 +111,18 @@ export default async function ChildrenPage({ searchParams }: PageProps<"/childre
             </thead>
             <tbody className="divide-y divide-border">
               {children.map((c) => {
-                const cls = c.class_id ? classById.get(c.class_id) : undefined;
+                const cls = c.classId ? classById.get(c.classId) : undefined;
                 return (
                   <tr key={c.id} className="relative hover:bg-surface-2">
                     <td className="px-5 py-3.5">
                       <Link href={`/children/${c.id}`} className="text-ink after:absolute after:inset-0">
-                        {c.full_name}
+                        {c.fullName}
                       </Link>
-                      {c.date_of_birth ? <span className="block text-caption text-ink-3">{formatAge(c.date_of_birth, today)}</span> : null}
+                      {c.dateOfBirth ? <span className="block text-caption text-ink-3">{formatAge(c.dateOfBirth, today)}</span> : null}
                     </td>
                     <td className="px-5 py-3.5">{cls ? <ClassName level={cls.level} name={cls.name} /> : <Pill tone="warning">No class</Pill>}</td>
-                    <td className="px-5 py-3.5 text-ink-2">{c.parent_name ?? <span className="text-ink-3">–</span>}</td>
-                    <td className="tnum px-5 py-3.5 text-ink-2">{formatPhone(c.parent_phone) || <span className="text-ink-3">–</span>}</td>
+                    <td className="px-5 py-3.5 text-ink-2">{c.parentName ?? <span className="text-ink-3">–</span>}</td>
+                    <td className="tnum px-5 py-3.5 text-ink-2">{formatPhone(c.parentPhone) || <span className="text-ink-3">–</span>}</td>
                   </tr>
                 );
               })}

@@ -1,50 +1,59 @@
+import "server-only";
 import { cache } from "react";
 import { redirect } from "next/navigation";
-import { createClient } from "@/lib/supabase/server";
+import { db } from "@/lib/db";
+import { readSessionCookie, validateSessionToken } from "@/lib/auth/session";
 import type { MemberRole, School } from "@/lib/types";
+
+export type SessionUser = { id: string; email: string; name: string; emailVerifiedAt: Date | null };
 
 export type SchoolSession = {
   userId: string;
-  email: string | undefined;
+  email: string;
+  emailVerified: boolean;
   displayName: string;
   role: MemberRole;
   school: School;
 };
 
-/** The signed-in user and their first school, or null for each when missing. Cached per request. */
+/** The signed-in user and their first staff membership, or null for each. Cached per request. */
 export const getSession = cache(async () => {
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const user: SessionUser | null = await validateSessionToken(await readSessionCookie());
   if (!user) return { user: null, membership: null } as const;
 
-  const { data: membership } = await supabase
-    .from("school_members")
-    .select("role, full_name, schools(id, name, city, timezone)")
-    .eq("user_id", user.id)
-    .in("role", ["owner", "admin", "teacher"])
-    .order("created_at")
-    .limit(1)
-    .maybeSingle();
+  const membership = await db.schoolMember.findFirst({
+    where: { userId: user.id, role: { in: ["owner", "admin", "teacher"] } },
+    select: { role: true, fullName: true, school: { select: { id: true, name: true, city: true, timezone: true } } },
+    orderBy: { createdAt: "asc" },
+  });
 
   return { user, membership } as const;
 });
 
-/** For pages inside the app: sends signed-out users to login and users without a school to onboarding. */
+/** For signed-in pages without a school yet (onboarding). Sends signed-out visitors to login. */
+export async function requireUser(): Promise<SessionUser> {
+  const { user } = await getSession();
+  if (!user) redirect("/login");
+  return user;
+}
+
+/**
+ * For every page and Server Action inside the app: sends signed-out visitors to login and
+ * users without a school to onboarding. The school always comes from the session, never
+ * from the browser.
+ */
 export async function requireSchool(): Promise<SchoolSession> {
   const { user, membership } = await getSession();
   if (!user) redirect("/login");
-  const school = membership?.schools as unknown as School | null;
-  if (!membership || !school) redirect("/onboarding");
+  if (!membership) redirect("/onboarding");
 
-  const metaName = typeof user.user_metadata?.full_name === "string" ? user.user_metadata.full_name : "";
   return {
     userId: user.id,
     email: user.email,
-    displayName: membership.full_name || metaName || user.email?.split("@")[0] || "there",
-    role: membership.role as MemberRole,
-    school,
+    emailVerified: Boolean(user.emailVerifiedAt),
+    displayName: membership.fullName || user.name || user.email.split("@")[0] || "there",
+    role: membership.role,
+    school: membership.school,
   };
 }
 

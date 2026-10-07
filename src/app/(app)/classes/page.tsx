@@ -47,7 +47,7 @@ export default async function ClassesPage() {
             </thead>
             <tbody className="tnum divide-y divide-border">
               {classes.map((cls) => {
-                const n = children.filter((c) => c.class_id === cls.id).length;
+                const n = children.filter((c) => c.classId === cls.id).length;
                 const full = cls.capacity !== null && n >= cls.capacity;
                 return (
                   <tr key={cls.id} className="relative hover:bg-surface-2">
