@@ -1,32 +1,42 @@
-// App-wide types come from the Prisma schema. Dates that are calendar days
-// (date of birth, joined on, attendance day) travel as "YYYY-MM-DD" strings.
-import type {
-  AttendanceStatus,
-  ClassLevel,
-  Child as ChildModel,
-  School as SchoolModel,
-  SchoolClass as SchoolClassModel,
-} from "@/generated/prisma/browser";
+export type MemberRole = "owner" | "admin" | "teacher" | "parent";
+export type ClassLevel = "playgroup" | "nursery" | "lkg" | "ukg" | "daycare" | "other";
+export type AttendanceStatus = "present" | "absent" | "late" | "leave";
 
-export type { AttendanceStatus, ChildStatus, ClassLevel, Gender, MemberRole } from "@/generated/prisma/browser";
+export type School = {
+  id: string;
+  name: string;
+  city: string | null;
+  timezone: string;
+};
 
-export type School = Pick<SchoolModel, "id" | "name" | "city" | "timezone">;
+export type SchoolClass = {
+  id: string;
+  school_id: string;
+  name: string;
+  level: ClassLevel;
+  capacity: number | null;
+  sort_order: number;
+};
 
-export type SchoolClass = Pick<SchoolClassModel, "id" | "schoolId" | "name" | "level" | "capacity" | "sortOrder">;
-
-export type Child = Pick<
-  ChildModel,
-  "id" | "schoolId" | "classId" | "fullName" | "gender" | "parentName" | "parentPhone" | "status" | "notes"
-> & {
-  dateOfBirth: string | null;
-  joinedOn: string;
+export type Child = {
+  id: string;
+  school_id: string;
+  class_id: string | null;
+  full_name: string;
+  date_of_birth: string | null;
+  gender: "girl" | "boy" | "other" | null;
+  parent_name: string | null;
+  parent_phone: string | null;
+  joined_on: string;
+  status: "active" | "left";
+  notes: string | null;
 };
 
 export type AttendanceRow = {
-  childId: string;
+  child_id: string;
   date: string;
   status: AttendanceStatus;
-  classId: string | null;
+  class_id: string | null;
 };
 
 export const CLASS_LEVELS: { value: ClassLevel; label: string }[] = [

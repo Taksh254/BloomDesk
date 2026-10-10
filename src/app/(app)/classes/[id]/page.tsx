@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ClipboardCheck, Trash2, UserPlus } from "lucide-react";
 import { canManage, requireSchool } from "@/lib/session";
-import { getChildren, getClass } from "@/lib/data";
+import { getChildren, getClasses } from "@/lib/data";
 import { formatAge, formatPhone } from "@/lib/format";
 import { Card, PageHeader } from "@/components/ui/card";
 import { LinkButton } from "@/components/ui/button";
@@ -16,7 +16,8 @@ export const metadata: Metadata = { title: "Class" };
 export default async function ClassPage({ params }: PageProps<"/classes/[id]">) {
   const { id } = await params;
   const { school, role } = await requireSchool();
-  const cls = await getClass(school.id, id);
+  const classes = await getClasses(school.id);
+  const cls = classes.find((c) => c.id === id);
   if (!cls) notFound();
   const children = await getChildren(school.id, { classId: cls.id });
   const manage = canManage(role);
@@ -54,12 +55,12 @@ export default async function ClassPage({ params }: PageProps<"/classes/[id]">) 
                 <li key={c.id}>
                   <Link href={`/children/${c.id}`} className="flex min-h-tap items-center justify-between gap-4 px-5 py-3 hover:bg-surface-2">
                     <span>
-                      <span className="block text-body-sm text-ink">{c.fullName}</span>
+                      <span className="block text-body-sm text-ink">{c.full_name}</span>
                       <span className="block text-caption text-ink-3">
-                        {[formatAge(c.dateOfBirth), c.parentName].filter(Boolean).join(" · ")}
+                        {[formatAge(c.date_of_birth), c.parent_name].filter(Boolean).join(" · ")}
                       </span>
                     </span>
-                    <span className="tnum text-caption text-ink-2">{formatPhone(c.parentPhone)}</span>
+                    <span className="tnum text-caption text-ink-2">{formatPhone(c.parent_phone)}</span>
                   </Link>
                 </li>
               ))}

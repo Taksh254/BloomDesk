@@ -5,7 +5,6 @@ import { Crayon } from "@/components/ui/class-crayon";
 import { Logo } from "@/components/ui/doodles";
 import { signOut } from "../(auth)/actions";
 import { SideNav, TabBar } from "./nav";
-import { VerifyBanner } from "./verify-banner";
 
 export default async function AppLayout({ children }: LayoutProps<"/">) {
   const session = await requireSchool();
@@ -46,10 +45,7 @@ export default async function AppLayout({ children }: LayoutProps<"/">) {
         </div>
       </aside>
       <main className="bd-paper bd-margin min-w-0 pt-6 pr-4 pb-28 pl-8 sm:px-10 lg:py-8">
-        <div className="mx-auto max-w-[1080px]">
-          {session.emailVerified ? null : <VerifyBanner email={session.email} />}
-          {children}
-        </div>
+        <div className="mx-auto max-w-[1080px]">{children}</div>
         <form action={signOut} className="mt-10 lg:hidden">
           <button className="inline-flex min-h-tap items-center gap-2 text-body-sm text-ink-2">
             <LogOut className="size-4" aria-hidden /> Sign out

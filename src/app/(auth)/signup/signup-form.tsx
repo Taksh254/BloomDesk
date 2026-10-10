@@ -11,6 +11,15 @@ export function SignupForm() {
   const v = state.values ?? {};
   const e = state.fieldErrors ?? {};
 
+  if (state.message) {
+    return (
+      <div className="bd-feature mt-6">
+        <p className="font-display text-h2">Check your email</p>
+        <p className="mt-2 text-body-sm text-ink-2">{state.message}</p>
+      </div>
+    );
+  }
+
   return (
     <form action={action} className="mt-6 grid gap-4" noValidate>
       <FormMessage>{state.error}</FormMessage>
