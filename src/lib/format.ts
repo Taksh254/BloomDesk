@@ -25,6 +25,16 @@ export function formatDate(iso: string) {
   );
 }
 
+/** A "YYYY-MM-DD" day as the Date that PostgreSQL `date` columns use (midnight UTC). */
+export function dayToDate(iso: string) {
+  return new Date(`${iso}T00:00:00Z`);
+}
+
+/** The "YYYY-MM-DD" day of a PostgreSQL `date` value. */
+export function dateToDay(date: Date) {
+  return date.toISOString().slice(0, 10);
+}
+
 export function shiftDay(iso: string, days: number) {
   const d = new Date(`${iso}T00:00:00Z`);
   d.setUTCDate(d.getUTCDate() + days);

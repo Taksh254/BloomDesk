@@ -21,7 +21,7 @@ export default async function TodayPage({ searchParams }: PageProps<"/today">) {
     getAttendance(school.id, today),
   ]);
 
-  const statusByChild = new Map(attendance.map((a) => [a.child_id, a.status]));
+  const statusByChild = new Map(attendance.map((a) => [a.childId, a.status]));
   const count = (pred: (s: string | undefined) => boolean) => children.filter((c) => pred(statusByChild.get(c.id))).length;
   const present = count((s) => s === "present" || s === "late");
   const absent = count((s) => s === "absent");
@@ -29,7 +29,7 @@ export default async function TodayPage({ searchParams }: PageProps<"/today">) {
   const notMarked = count((s) => s === undefined);
 
   const perClass = classes.map((cls) => {
-    const kids = children.filter((c) => c.class_id === cls.id);
+    const kids = children.filter((c) => c.classId === cls.id);
     const marked = kids.filter((c) => statusByChild.has(c.id));
     return {
       cls,
@@ -39,7 +39,7 @@ export default async function TodayPage({ searchParams }: PageProps<"/today">) {
       notMarked: kids.length - marked.length,
     };
   });
-  const unassigned = children.filter((c) => !c.class_id).length;
+  const unassigned = children.filter((c) => !c.classId).length;
 
   const attention: { href: string; text: string; cta: string }[] = [];
   for (const row of perClass) {

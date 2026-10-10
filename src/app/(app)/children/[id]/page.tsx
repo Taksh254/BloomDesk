@@ -23,7 +23,7 @@ export default async function ChildPage({ params }: PageProps<"/children/[id]">)
 
   const today = todayISO(school.timezone);
   const [classes, recent] = await Promise.all([getClasses(school.id), getChildAttendance(school.id, child.id, shiftDay(today, -29))]);
-  const cls = classes.find((c) => c.id === child.class_id);
+  const cls = classes.find((c) => c.id === child.classId);
   const manage = canManage(role);
   const presentDays = recent.filter((r) => r.status === "present" || r.status === "late").length;
 
@@ -33,8 +33,8 @@ export default async function ChildPage({ params }: PageProps<"/children/[id]">)
         <ArrowLeft className="size-4" aria-hidden /> All children
       </Link>
       <PageHeader
-        title={child.full_name}
-        description={[formatAge(child.date_of_birth, today), `Joined ${formatDate(child.joined_on)}`].filter(Boolean).join(" · ")}
+        title={child.fullName}
+        description={[formatAge(child.dateOfBirth, today), `Joined ${formatDate(child.joinedOn)}`].filter(Boolean).join(" · ")}
         actions={child.status === "left" ? <Pill>Left the school</Pill> : cls ? <ClassName level={cls.level} name={cls.name} /> : <Pill tone="warning">No class</Pill>}
       />
 
@@ -45,17 +45,17 @@ export default async function ChildPage({ params }: PageProps<"/children/[id]">)
           </Card>
         ) : (
           <Card className="p-6 text-body-sm text-ink-2">
-            <p>{child.parent_name ?? "Parent not added"}</p>
-            <p>{formatPhone(child.parent_phone)}</p>
+            <p>{child.parentName ?? "Parent not added"}</p>
+            <p>{formatPhone(child.parentPhone)}</p>
           </Card>
         )}
 
         <div className="grid gap-6">
-          {child.parent_phone ? (
+          {child.parentPhone ? (
             <Card className="p-5">
-              <h2 className="text-h3 text-ink">{child.parent_name ?? "Parent"}</h2>
-              <a href={`tel:+91${child.parent_phone}`} className="mt-2 inline-flex min-h-tap items-center gap-2 text-body-sm text-primary">
-                <Phone className="size-4" aria-hidden /> {formatPhone(child.parent_phone)}
+              <h2 className="text-h3 text-ink">{child.parentName ?? "Parent"}</h2>
+              <a href={`tel:+91${child.parentPhone}`} className="mt-2 inline-flex min-h-tap items-center gap-2 text-body-sm text-primary">
+                <Phone className="size-4" aria-hidden /> {formatPhone(child.parentPhone)}
               </a>
             </Card>
           ) : null}
@@ -84,7 +84,7 @@ export default async function ChildPage({ params }: PageProps<"/children/[id]">)
           {manage ? (
             <form action={setChildStatus.bind(null, child.id, child.status === "active" ? "left" : "active")}>
               {child.status === "active" ? (
-                <ConfirmSubmit variant="ghost" size="sm" confirm={`Mark ${child.full_name} as left? They will move out of class lists and attendance.`}>
+                <ConfirmSubmit variant="ghost" size="sm" confirm={`Mark ${child.fullName} as left? They will move out of class lists and attendance.`}>
                   <UserMinus aria-hidden /> Mark as left the school
                 </ConfirmSubmit>
               ) : (
