@@ -1,15 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { redirect } from "next/navigation";
-import { getSession } from "@/lib/session";
 import { SignupForm } from "./signup-form";
 
 export const metadata: Metadata = { title: "Set up your school" };
 
-export default async function SignupPage() {
-  const { user } = await getSession();
-  if (user) redirect("/today");
-
+export default function SignupPage() {
   return (
     <div className="rounded-lg bg-surface p-6 shadow-md sm:p-8">
       <h1 className="font-display text-h1 text-ink">Set up your school</h1>

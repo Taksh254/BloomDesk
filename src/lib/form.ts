@@ -30,6 +30,5 @@ export function normaliseMobile(raw: string) {
 
 /** Only allow redirects to paths inside the app. */
 export function safeNext(next: string | null | undefined, fallback = "/today") {
-  // "//host" and "/\\host" would leave the site.
-  return next && next.startsWith("/") && !next.startsWith("//") && !next.includes("\\") ? next : fallback;
+  return next && next.startsWith("/") && !next.startsWith("//") ? next : fallback;
 }
